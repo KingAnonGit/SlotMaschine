@@ -8,18 +8,21 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 
-import de.kinganon.slotmaschine.items.ItemGenerators;
+import de.kinganon.slotmaschine.items.ItemGenerator;
 
 public class ChestInventory {
     
     public static Inventory createChestInventroy(Player player) {
         Inventory inventory = Bukkit.createInventory(player, 45, "§4Lotterie");
+        
+        ItemGenerator itemGenerator = new ItemGenerator(Material.STAINED_GLASS_PANE, " ");
+        
         for (int i = 0; i < 45; i++) {
-            inventory.setItem(i, ItemGenerators.ItemGenerator(Material.STAINED_GLASS_PANE, " "));
+            inventory.setItem(i, itemGenerator.getItemStack());
         }
-        List<String> list = new ArrayList<String>();
+        List<String> list = new ArrayList<>();
         list.add("§eGewinne jetzt viele Tolle Preise!");
-        inventory.setItem(22, ItemGenerators.ItemGenerator(Material.ENCHANTMENT_TABLE, "§eLos!", list));
+        inventory.setItem(22, new ItemGenerator(Material.ENCHANTMENT_TABLE, "§eLos!", list).getItemStack());
         return inventory;
     }
 }
